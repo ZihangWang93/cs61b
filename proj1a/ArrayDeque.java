@@ -88,7 +88,7 @@ public class ArrayDeque<T> {
             System.out.println("index is out of bound, please choose another index");
             return null;
         }
-        return items[index];
+        return items[adjustPlusIndex(nextFirst + index + 1)];
     }
 
     private int adjustMinusIndex(int index) {
