@@ -3,13 +3,13 @@
  * @param <T>
  */
 public class ArrayDeque<T> {
-    int size;
-    int nextFirst;
-    int nextLast;
-    int capacity;
+    private int size;
+    private int nextFirst;
+    private int nextLast;
+    private int capacity;
     private int RFACTOR = 4;
     private int RdcFACTOR = 2;
-    T[] items;
+    private T[] items;
 
     public ArrayDeque() {
         size = 0;
@@ -60,8 +60,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (size / capacity <= 0.25) {
-            rduceSize();
+        float rate = (float)size / capacity;
+        if (rate <= 0.25) {
+            rdcSize();
         }
         size -= 1;
         nextFirst = adjustPlusIndex(nextFirst + 1);
@@ -71,8 +72,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if (size / capacity <= 0.25) {
-            rduceSize();
+        float rate = (float)size / capacity;
+        if (rate <= 0.25) {
+            rdcSize();
         }
         size -= 1;
         nextLast = adjustMinusIndex(nextLast - 1);
@@ -106,20 +108,40 @@ public class ArrayDeque<T> {
     private void resize() {
         capacity = capacity * RFACTOR;
         T[] newItemArray = (T[]) new Object[capacity];
+
+        if (nextLast == 0) {
+            System.arraycopy(items, 1, newItemArray, capacity - size, size);
+            nextFirst = capacity -1 - size;
+            items = newItemArray;
+            return;
+        }
         System.arraycopy(items, 0, newItemArray, 0, nextLast);
         System.arraycopy(items, adjustPlusIndex(nextFirst + 1), newItemArray,
-                capacity - size + nextLast + 1, size - nextLast);
+                capacity - size + nextLast, size - nextLast);
         nextFirst = nextLast + capacity / RFACTOR * (RFACTOR - 1);
         items = newItemArray;
     }
 
-    private void rduceSize() {
+    private void rdcSize() {
         capacity = capacity / RdcFACTOR;
         T[] newItemArray = (T[]) new Object[capacity];
+
+        if (nextLast == 0) {
+            System.arraycopy(items, nextFirst + 1, newItemArray, capacity - size, size );
+            items = newItemArray;
+            nextFirst = capacity - size -1;
+            return;
+        }
+
+        if (nextFirst == 0) {
+            System.arraycopy(items, 0, newItemArray, 0, nextLast);
+            items = newItemArray;
+            nextFirst = capacity - 1;
+            return;
+        }
         System.arraycopy(items, 0, newItemArray, 0, nextLast);
-        System.arraycopy(items, adjustPlusIndex(nextFirst + 1), newItemArray,
-                capacity - size + nextLast + 1, size - nextLast);
-        nextFirst = nextLast - capacity * (RdcFACTOR - 1);
+        System.arraycopy(items, nextFirst + 1, newItemArray, capacity - size + nextLast,size - nextLast);
+        nextFirst = nextFirst - capacity * (RdcFACTOR - 1);
         items = newItemArray;
     }
 }

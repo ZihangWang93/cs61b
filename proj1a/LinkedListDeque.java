@@ -7,7 +7,7 @@ public class LinkedListDeque<T> {
     private ItemNode frontSentinel;
     private ItemNode backSentinel;
 
-    public class ItemNode {
+    private class ItemNode {
         private T item;
         private ItemNode prePointer;
         private ItemNode nextPointer;
