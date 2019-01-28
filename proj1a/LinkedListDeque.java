@@ -1,18 +1,18 @@
 /** An LinkedListDeque is a structure that can be expanded
  * from either the front or the end
- * @param <Item>
+ * @param <T>
  */
-public class LinkedListDeque<Item> {
+public class LinkedListDeque<T> {
     private int size;
     private ItemNode frontSentinel;
     private ItemNode backSentinel;
 
     public class ItemNode {
-        private Item item;
+        private T item;
         private ItemNode prePointer;
         private ItemNode nextPointer;
 
-        public ItemNode(Item i, ItemNode p, ItemNode n) {
+        public ItemNode(T i, ItemNode p, ItemNode n) {
             item = i;
             prePointer = p;
             nextPointer = n;
@@ -27,14 +27,14 @@ public class LinkedListDeque<Item> {
         backSentinel.prePointer = frontSentinel;
     }
 
-    public void addFirst(Item i) {
+    public void addFirst(T i) {
         size += 1;
         ItemNode newItem = new ItemNode(i, frontSentinel, frontSentinel.nextPointer);
         frontSentinel.nextPointer.prePointer = newItem;
         frontSentinel.nextPointer = newItem;
     }
 
-    public void addLast(Item i) {
+    public void addLast(T i) {
         size += 1;
         ItemNode newItem = new ItemNode(i, backSentinel.prePointer, backSentinel);
         backSentinel.prePointer.nextPointer = newItem;
@@ -62,31 +62,31 @@ public class LinkedListDeque<Item> {
         }
     }
 
-    public Item removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
 
-        Item itemRemoved = frontSentinel.nextPointer.item;
+        T itemRemoved = frontSentinel.nextPointer.item;
         frontSentinel.nextPointer.nextPointer.prePointer = frontSentinel;
         frontSentinel.nextPointer = frontSentinel.nextPointer.nextPointer;
         size -= 1;
         return itemRemoved;
     }
 
-    public  Item removeLast() {
+    public  T removeLast() {
         if (size == 0) {
             return null;
         }
 
-        Item itemRemoved = backSentinel.prePointer.item;
+        T itemRemoved = backSentinel.prePointer.item;
         backSentinel.prePointer.prePointer.nextPointer = backSentinel;
         backSentinel.prePointer = backSentinel.prePointer.prePointer;
         size -= 1;
         return  itemRemoved;
     }
 
-    public Item get(int index) {
+    public T get(int index) {
         if (index == 0) {
             return frontSentinel.nextPointer.item;
         }
@@ -103,7 +103,7 @@ public class LinkedListDeque<Item> {
         return getPointer.item;
     }
 
-    public Item getRecursive(int index) {
+    public T getRecursive(int index) {
         if (size <= index) {
             return null;
         }

@@ -1,25 +1,25 @@
 /** An ArrayDeque is a sequence of items in array form which can both
  * be added from the front and the end
- * @param <Item>
+ * @param <T>
  */
-public class ArrayDeque<Item> {
+public class ArrayDeque<T> {
     int size;
     int nextFirst;
     int nextLast;
     int capacity;
     private int RFACTOR = 4;
     private int RdcFACTOR = 2;
-    Item[] items;
+    T[] items;
 
     public ArrayDeque() {
         size = 0;
         nextFirst = 4;
         nextLast = 5;
         capacity = 8;
-        items = (Item[]) new Object[8];
+        items = (T[]) new Object[8];
     }
 
-    public void addFirst(Item i) {
+    public void addFirst(T i) {
         if (nextFirst == nextLast) {
             resize();
         }
@@ -28,7 +28,7 @@ public class ArrayDeque<Item> {
         nextFirst = adjustMinusIndex(nextFirst - 1);
     }
 
-    public void addLast(Item i) {
+    public void addLast(T i) {
         if (nextFirst == nextLast) {
             resize();
         }
@@ -59,29 +59,29 @@ public class ArrayDeque<Item> {
         }
     }
 
-    public Item removeFirst() {
+    public T removeFirst() {
         if (size / capacity <= 0.25) {
             rduceSize();
         }
         size -= 1;
         nextFirst = adjustPlusIndex(nextFirst + 1);
-        Item removeItem = items[nextFirst];
+        T removeItem = items[nextFirst];
         items[nextFirst] = null;
         return removeItem;
     }
 
-    public Item removeLast() {
+    public T removeLast() {
         if (size / capacity <= 0.25) {
             rduceSize();
         }
         size -= 1;
         nextLast = adjustMinusIndex(nextLast - 1);
-        Item removeItem = items[nextLast];
+        T removeItem = items[nextLast];
         items[nextLast] = null;
         return removeItem;
     }
 
-    public Item get(int index) {
+    public T get(int index) {
         if (index > capacity - 1) {
             System.out.println("index is out of bound, please choose another index");
             return null;
@@ -105,7 +105,7 @@ public class ArrayDeque<Item> {
 
     private void resize() {
         capacity = capacity * RFACTOR;
-        Item[] newItemArray = (Item[]) new Object[capacity];
+        T[] newItemArray = (T[]) new Object[capacity];
         System.arraycopy(items, 0, newItemArray, 0, nextLast);
         System.arraycopy(items, adjustPlusIndex(nextFirst + 1), newItemArray,
                 capacity - size + nextLast + 1, size - nextLast);
@@ -115,7 +115,7 @@ public class ArrayDeque<Item> {
 
     private void rduceSize() {
         capacity = capacity / RdcFACTOR;
-        Item[] newItemArray = (Item[]) new Object[capacity];
+        T[] newItemArray = (T[]) new Object[capacity];
         System.arraycopy(items, 0, newItemArray, 0, nextLast);
         System.arraycopy(items, adjustPlusIndex(nextFirst + 1), newItemArray,
                 capacity - size + nextLast + 1, size - nextLast);
