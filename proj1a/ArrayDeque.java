@@ -93,14 +93,14 @@ public class ArrayDeque<T> {
 
     private int adjustMinusIndex(int index) {
         if (index < 0) {
-            return capacity - 1;
+            return capacity + index;
         }
         return index;
     }
 
     private int adjustPlusIndex(int index) {
-        if (index == capacity) {
-            return 0;
+        if (index >= capacity) {
+            return index - capacity;
         }
         return index;
     }
