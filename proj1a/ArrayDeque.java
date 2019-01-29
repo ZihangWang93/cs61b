@@ -64,7 +64,7 @@ public class ArrayDeque<T> {
             return null;
         }
         float rate = (float)size / capacity;
-        if (rate <= 0.25) {
+        if (rate < 0.25) {
             rdcSize();
         }
         size -= 1;
@@ -79,7 +79,7 @@ public class ArrayDeque<T> {
             return null;
         }
         float rate = (float)size / capacity;
-        if (rate <= 0.25) {
+        if (rate < 0.25) {
             rdcSize();
         }
         size -= 1;

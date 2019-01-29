@@ -83,21 +83,26 @@ public class LinkedListDequeTest {
 
 	public static void arrayTest() {
 		ArrayDeque<Integer> array = new ArrayDeque<>();
-		for (int i = 1; i<=17; i++) {
-			array.addFirst(i);
-			array.addLast(i);
-		}
-
-		array.printDeque();
-		array.get(16);
-
-		for (int i = 1; i <= 10; i++ ) {
-			array.removeFirst();
-			array.removeFirst();
-			array.removeFirst();
-			array.removeLast();
+		array.isEmpty();
+		array.addFirst(1);
+		array.removeLast();
+		array.addFirst(3);
+		array.removeLast();
+//		for (int i = 1; i<=17; i++) {
+//			array.addFirst(i);
+//			array.addLast(i);
+//		}
+//
+//		array.printDeque();
+//		array.get(16);
+//
+//		for (int i = 1; i <= 10; i++ ) {
+//			array.removeFirst();
+//			array.removeFirst();
+//			array.removeFirst();
 //			array.removeLast();
-		}
+//			array.removeLast();
+//		}
 	}
 
 	public static void main(String[] args) {
