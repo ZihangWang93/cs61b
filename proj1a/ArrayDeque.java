@@ -60,6 +60,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         float rate = (float)size / capacity;
         if (rate <= 0.25) {
             rdcSize();
@@ -72,6 +75,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         float rate = (float)size / capacity;
         if (rate <= 0.25) {
             rdcSize();
