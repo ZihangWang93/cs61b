@@ -126,22 +126,30 @@ public class ArrayDeque<T> {
         capacity = capacity / RdcFACTOR;
         T[] newItemArray = (T[]) new Object[capacity];
 
-        if (nextLast == 0) {
-            System.arraycopy(items, nextFirst + 1, newItemArray, capacity - size, size );
-            items = newItemArray;
-            nextFirst = capacity - size -1;
-            return;
-        }
+//        if (nextLast == 0) {
+//            System.arraycopy(items, nextFirst + 1, newItemArray, capacity - size, size );
+//            items = newItemArray;
+//            nextFirst = capacity - size -1;
+//            return;
+//        }
+//
+//        if (nextFirst == 0) {
+//            System.arraycopy(items, 0, newItemArray, 0, nextLast);
+//            items = newItemArray;
+//            nextFirst = capacity - 1;
+//            return;
+//        }
 
-        if (nextFirst == 0) {
-            System.arraycopy(items, 0, newItemArray, 0, nextLast);
-            items = newItemArray;
+        if (nextFirst < nextLast) {
+            System.arraycopy(items, nextFirst + 1, newItemArray, 0, size);
             nextFirst = capacity - 1;
-            return;
+            nextLast = size;
+        } else {
+            System.arraycopy(items, nextFirst, newItemArray, 0, capacity * RdcFACTOR - nextFirst);
+            System.arraycopy(items, 0, newItemArray, capacity * RdcFACTOR - nextFirst,nextLast + 1);
+            nextFirst = 0;
+            nextLast = size + 1;
         }
-        System.arraycopy(items, 0, newItemArray, 0, nextLast);
-        System.arraycopy(items, nextFirst + 1, newItemArray, capacity - size + nextLast,size - nextLast);
-        nextFirst = nextFirst - capacity * (RdcFACTOR - 1);
         items = newItemArray;
     }
 }
