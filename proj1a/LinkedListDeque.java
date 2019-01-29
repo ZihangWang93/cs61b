@@ -12,7 +12,7 @@ public class LinkedListDeque<T> {
         private ItemNode prePointer;
         private ItemNode nextPointer;
 
-        public ItemNode(T i, ItemNode p, ItemNode n) {
+        private ItemNode(T i, ItemNode p, ItemNode n) {
             item = i;
             prePointer = p;
             nextPointer = n;

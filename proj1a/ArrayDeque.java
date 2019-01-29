@@ -63,7 +63,7 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        float rate = (float)size / capacity;
+        float rate = (float) size / capacity;
         if (rate < 0.25) {
             rdcSize();
         }
@@ -78,7 +78,7 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        float rate = (float)size / capacity;
+        float rate = (float) size / capacity;
         if (rate < 0.25) {
             rdcSize();
         }
@@ -117,7 +117,7 @@ public class ArrayDeque<T> {
 
         if (nextLast == 0) {
             System.arraycopy(items, 1, newItemArray, capacity - size, size);
-            nextFirst = capacity -1 - size;
+            nextFirst = capacity - 1 - size;
             items = newItemArray;
             return;
         }
@@ -152,7 +152,8 @@ public class ArrayDeque<T> {
             nextLast = size;
         } else {
             System.arraycopy(items, nextFirst, newItemArray, 0, capacity * RdcFACTOR - nextFirst);
-            System.arraycopy(items, 0, newItemArray, capacity * RdcFACTOR - nextFirst,nextLast + 1);
+            System.arraycopy(items, 0, newItemArray, capacity * RdcFACTOR - nextFirst,
+                    nextLast + 1);
             nextFirst = 0;
             nextLast = size + 1;
         }
