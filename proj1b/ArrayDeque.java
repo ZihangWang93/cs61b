@@ -2,7 +2,7 @@
  * be added from the front and the end
  * @param <T>
  */
-public class ArrayDeque<T> implements  Deque<T>{
+public class ArrayDeque<T> implements  Deque<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
