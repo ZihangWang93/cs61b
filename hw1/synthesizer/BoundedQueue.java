@@ -3,8 +3,8 @@ package synthesizer;
 public interface BoundedQueue<T> {
     int capacity();
     int fillCount();
-    void enquene(T x);
-    T dequene();
+    void enqueue(T x);
+    T dequeue();
     T peek();
 
     default boolean isEmpty() {
